@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "dbt-workshop"
+version = "0.1.0"
+description = ""
+authors = ["Robinson Lovatto <robinson.lovatto@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12.1"
+dbt-postgres = "^1.8.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
