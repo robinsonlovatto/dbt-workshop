@@ -1,16 +1,53 @@
-version: 2
+version: 2  # metadata version
 
 models:
-  - name: stg_customers
-    column: 
-      - name: customer_id
-        data_test:
-          - not_null
-          - unique
-      - name: name
-        data_test:
-          - not_null
-      - name: email
-        data_test:
-          - not_null
-          - unique
+  - name: stg_orders  # model_name
+    description: "Orders table"  # model description
+    columns:
+      - name: order_id  # column name
+        description: "Unique id of orders"  # Column description
+        tests:
+          - not_null 
+          - unique  
+      - name: customer_id  
+        description: "Customer of the order"  
+        tests:
+          - not_null 
+          - relationships:  # Test to ensure the referential integrity
+              to: ref('stg_customers')  # Model it references
+              field: customer_id  # Column of the model it references
+
+  - name: stg_order_details 
+    description: "Details of the orders"  
+    columns:
+      - name: order_id 
+        description: "Id to reference the order"  
+        tests:
+          - not_null  
+      - name: product_id  
+        description: "Id of the product ordered"  
+        tests:
+          - not_null  
+      - name: unit_price  
+        description: "Price by unit"  
+        tests:
+          - not_null  
+      - name: quantity  
+        description: "Quantity"  
+        tests:
+          - not_null  
+
+  - name: stg_customers  
+    description: "Customer table"  
+    columns:
+      - name: customer_id  
+        description: "Customer unique identifier"  
+        type: integer  # Datatype of the column
+        tests:
+          - not_null  
+          - unique  
+      - name: company_name  
+        description: "Company name of the customer"  
+        data_type: varchar  
+        tests:
+          - not_null 
